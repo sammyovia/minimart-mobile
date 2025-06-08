@@ -26,7 +26,7 @@ export const products: Product[] = [
     id: 4,
     name: 'Apple Airpods 4 Active Noise Cancellation',
     price: '$129.00',
-    image: require('../assets/images/airpods.png'),
+    image: require('../assets/images/airpod.png'),
     description: `High quality sound with improved noise cancellation.`,
   },
 ];

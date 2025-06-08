@@ -8,13 +8,13 @@ const favorites = [
     id: '1',
     name: 'Apple iPhone 16 128GB|Teal',
     price: '$700.00',
-    image: require('../assets/iphone.png'), // Replace with actual image
+    image: require('../../assets/images/iphone16.png'), // Replace with actual image
   },
   {
     id: '2',
     name: 'M4 MacBook Air 13” 256GB|Sky Blue',
     price: '$1000.00',
-    image: require('../assets/macbook.png'),
+    image: require('../../assets/images/mac.png'),
   },
 ];
 

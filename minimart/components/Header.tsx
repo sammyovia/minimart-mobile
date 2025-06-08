@@ -11,7 +11,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
     <View style={styles.container}>
       {/* Logo */}
       <Image
-        source={require('../assets/logo.png')}
+        source={require('../assets/images/logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />
