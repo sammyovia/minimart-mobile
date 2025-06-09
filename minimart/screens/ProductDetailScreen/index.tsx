@@ -9,25 +9,41 @@ import {
   Text,
   TouchableOpacity,
   View,
-  StyleSheet, // Import StyleSheet for local styles
+  StyleSheet,
 } from 'react-native';
-// Import global styles and constants
 import { Colors } from '../../constants/Colors';
 import { Layout } from '../../constants/Layout';
 import { GlobalStyles } from '../../styles/GlobalStyles';
-import { Product } from '../../types'; // Make sure this path is correct
-import { useCart } from '../../contexts/CartContext'; // Import useCart
+import { Product } from '../../types';
+import { useCart } from '../../contexts/CartContext';
+import { products } from '../../data/products'; // <--- Import your products data here
 
 const ProductDetailScreen = () => {
-  const { product } = useLocalSearchParams();
-  const parsedProduct: Product = JSON.parse(product as string);
+  const { productId } = useLocalSearchParams(); // <--- Change: Get productId
   const router = useRouter();
-  const { addToCart } = useCart(); // Use the addToCart function from context
+  const { addToCart } = useCart();
+
+  // Find the product based on the ID passed
+  const parsedProduct: Product | undefined = products.find(
+    (p) => p.id.toString() === productId
+  );
 
   const [showTooltip, setShowTooltip] = useState(false);
 
+  // Handle case where product is not found (e.g., direct navigation with invalid ID)
+  if (!parsedProduct) {
+    return (
+      <SafeAreaView style={[GlobalStyles.screenContainer, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Text style={GlobalStyles.bodyText}>Product not found.</Text>
+        <TouchableOpacity style={GlobalStyles.primaryButton} onPress={() => router.back()}>
+          <Text style={GlobalStyles.primaryButtonText}>Go Back</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
+    );
+  }
+
   const handleAddToCart = () => {
-    addToCart(parsedProduct); // Add the parsed product to the cart
+    addToCart(parsedProduct);
     setShowTooltip(true);
     setTimeout(() => setShowTooltip(false), 3000);
   };
@@ -106,30 +122,28 @@ const ProductDetailScreen = () => {
 
 export default ProductDetailScreen;
 
-// Local styles specific to ProductDetailScreen
 const localStyles = StyleSheet.create({
   container: {
     flex: 1,
-    // GlobalStyles.contentPadding handles horizontal padding
   },
   goBack: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: Layout.spacing.lg, // Space below "Go back"
-    marginTop: Layout.spacing.md, // Space from header if no back button in header
+    marginBottom: Layout.spacing.lg,
+    marginTop: Layout.spacing.md,
   },
   imageWrapper: {
     backgroundColor: Colors.white,
     borderRadius: Layout.borderRadius.md,
-    ...Layout.shadow.medium, // Slightly more prominent shadow for main product image
+    ...Layout.shadow.medium,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: Layout.spacing.xl, // Padding around the image inside its wrapper
+    padding: Layout.spacing.xl,
     marginBottom: Layout.spacing.lg,
   },
   productImage: {
-    width: Layout.window.width * 0.7, // Adjust as needed, e.g., 70% of screen width
-    height: Layout.window.width * 0.7, // Keep aspect ratio
+    width: Layout.window.width * 0.7,
+    height: Layout.window.width * 0.7,
     resizeMode: 'contain',
   },
   heartIcon: {
@@ -137,21 +151,21 @@ const localStyles = StyleSheet.create({
     top: Layout.spacing.sm,
     right: Layout.spacing.sm,
     backgroundColor: Colors.white,
-    borderRadius: Layout.borderRadius.xl, // Makes it circular
+    borderRadius: Layout.borderRadius.xl,
     padding: Layout.spacing.xs,
     ...Layout.shadow.light,
   },
   infoContainer: {
-    flex: 1, // Allows info to take available space
-    paddingHorizontal: Layout.spacing.sm, // Minor horizontal padding for info
-    marginBottom: Layout.spacing.xl, // Space before the Add to Cart button
+    flex: 1,
+    paddingHorizontal: Layout.spacing.sm,
+    marginBottom: Layout.spacing.xl,
   },
   productName: {
     marginBottom: Layout.spacing.sm,
   },
   productPrice: {
     marginBottom: Layout.spacing.md,
-    color: Colors.primary, // Highlight price with primary color
+    color: Colors.primary,
   },
   productDescription: {
     lineHeight: 22,

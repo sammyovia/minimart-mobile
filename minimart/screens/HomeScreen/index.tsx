@@ -9,24 +9,25 @@ import {
   View,
   SafeAreaView,
   StatusBar,
-  StyleSheet, // Import StyleSheet for local styles
-  TextInput, // For the search bar
+  StyleSheet,
+  TextInput,
 } from 'react-native';
 import { products } from '../../data/products'; // Make sure this path is correct
-import { Product } from '../../types'; // Make sure this path is correct
-import { GlobalStyles } from '../../styles/GlobalStyles'; // Import global styles
-import { Colors } from '../../constants/Colors'; // Import Colors
-import { Layout } from '../../constants/Layout'; // Import Layout
-import { Ionicons } from '@expo/vector-icons'; // For search icon and notification icon
+import { Product } from '../../types';
+import { GlobalStyles } from '../../styles/GlobalStyles';
+import { Colors } from '../../constants/Colors';
+import { Layout } from '../../constants/Layout';
+import { Ionicons } from '@expo/vector-icons';
 
 const HomeScreen = () => {
   const renderItem = ({ item }: { item: Product }) => (
     <TouchableOpacity
-      style={[GlobalStyles.card, localStyles.productCard]} // Apply global card style + local spacing/sizing
+      style={[GlobalStyles.card, localStyles.productCard]}
+      // ONLY pass the product ID, not the whole JSON.stringified object
       onPress={() =>
         router.push({
           pathname: '/(view)/productDetail',
-          params: { product: JSON.stringify(item) },
+          params: { productId: item.id.toString() }, // <--- Change: Pass product ID as string
         })
       }
     >
@@ -75,33 +76,32 @@ const HomeScreen = () => {
           numColumns={2}
           renderItem={renderItem}
           contentContainerStyle={localStyles.flatListContent}
-          columnWrapperStyle={localStyles.columnWrapper} // For spacing between columns
+          columnWrapperStyle={localStyles.columnWrapper}
         />
       </View>
     </SafeAreaView>
   );
 };
 
-// Local styles for HomeScreen, specific to its layout and components
 const localStyles = StyleSheet.create({
   contentWrapper: {
-    flex: 1, // Allow content to take remaining space
+    flex: 1,
   },
   sectionHeader: {
     marginBottom: Layout.spacing.md,
     marginTop: Layout.spacing.sm,
   },
   productCard: {
-    flex: 1, // Allows cards to share space in a column
-    margin: Layout.spacing.xs, // Small margin around each card
+    flex: 1,
+    margin: Layout.spacing.xs,
     padding: Layout.spacing.sm,
-    maxWidth: (Layout.window.width / 2) - (Layout.spacing.lg + Layout.spacing.xs * 2), // Calculate max width for 2 columns with padding
+    maxWidth: (Layout.window.width / 2) - (Layout.spacing.lg + Layout.spacing.xs * 2),
     alignItems: 'center',
   },
   productImage: {
-    width: '100%', // Take full width of card
-    height: 120, // Fixed height for consistency
-    resizeMode: 'contain', // Or 'cover' depending on desired crop
+    width: '100%',
+    height: 120,
+    resizeMode: 'contain',
     marginBottom: Layout.spacing.sm,
     borderRadius: Layout.borderRadius.sm,
   },
@@ -110,18 +110,18 @@ const localStyles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: Layout.spacing.xs,
-    height: 40, // Fixed height for two lines of text to prevent jumpy layout
+    height: 40,
   },
   productPrice: {
     fontSize: 18,
     textAlign: 'center',
-    color: Colors.primary, // Price highlighted with primary color
+    color: Colors.primary,
   },
   flatListContent: {
-    paddingBottom: Layout.spacing.lg, // Padding at the bottom of the list
+    paddingBottom: Layout.spacing.lg,
   },
   columnWrapper: {
-    justifyContent: 'space-between', // Distribute items evenly in a row
+    justifyContent: 'space-between',
   },
 });
 

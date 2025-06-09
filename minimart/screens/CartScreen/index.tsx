@@ -1,4 +1,4 @@
-// app/cartScreen.tsx
+// CartScreen.tsx
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -10,16 +10,14 @@ import {
   View,
   Image,
   FlatList,
-  StyleSheet, // Import StyleSheet for local styles
+  StyleSheet,
 } from 'react-native';
-// Import global styles and constants
 import { Colors } from '../../constants/Colors';
 import { Layout } from '../../constants/Layout';
 import { GlobalStyles } from '../../styles/GlobalStyles';
-import { useCart } from '../../contexts/CartContext'; // Import useCart
-import { Product, CartItem } from '../../types'; // Import Product and CartItem types
+import { useCart } from '../../contexts/CartContext';
+import { Product, CartItem } from '../../types';
 
-// A separate component for rendering each cart item for better readability and reusability
 interface CartItemProps {
   item: CartItem;
   increaseQuantity: (productId: number) => void;
@@ -28,7 +26,6 @@ interface CartItemProps {
 }
 
 const CartItemComponent: React.FC<CartItemProps> = ({ item, increaseQuantity, decreaseQuantity, removeFromCart }) => {
-  // Ensure price is a number for calculation, assuming it's a string from Product type
   const itemPrice = parseFloat(item.product.price);
 
   return (
@@ -69,12 +66,11 @@ const CartScreen = () => {
   const router = useRouter();
   const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
 
-  // Calculate subtotal, shipping, and total based on actual cart items
   const subtotal = cartItems.reduce(
     (sum, item) => sum + parseFloat(item.product.price) * item.quantity,
     0
   );
-  const shipping = 10; // Example shipping cost
+  const shipping = 10;
   const total = subtotal + shipping;
 
   return (
@@ -103,7 +99,6 @@ const CartScreen = () => {
           <Ionicons name="arrow-back" size={24} color={Colors.text} />
           <Text style={[GlobalStyles.headerTitle, { marginLeft: Layout.spacing.sm }]}>Your Cart</Text>
         </TouchableOpacity>
-        {/* Number of items can be displayed here if desired */}
         <Text style={GlobalStyles.secondaryText}>{cartItems.length} items</Text>
       </View>
 
@@ -125,7 +120,7 @@ const CartScreen = () => {
             <Text style={[GlobalStyles.bodyText, localStyles.emptyCartText]}>Your cart is empty.</Text>
             <TouchableOpacity
               style={[GlobalStyles.primaryButton, { marginTop: Layout.spacing.lg }]}
-              onPress={() => router.replace('/(tabs)')} // Navigate to home
+              onPress={() => router.replace('/(tabs)')}
             >
               <Text style={GlobalStyles.primaryButtonText}>Start Shopping</Text>
             </TouchableOpacity>
@@ -149,7 +144,8 @@ const CartScreen = () => {
             <Text style={GlobalStyles.heading2}>Total</Text>
             <Text style={GlobalStyles.heading2}>${total.toFixed(2)}</Text>
           </View>
-          <TouchableOpacity style={GlobalStyles.primaryButton}>
+          {/* Apply local style to adjust the button for full width and correct padding */}
+          <TouchableOpacity style={[GlobalStyles.primaryButton, localStyles.checkoutButton]}>
             <Text style={GlobalStyles.primaryButtonText}>Checkout (${total.toFixed(2)})</Text>
           </TouchableOpacity>
         </View>
@@ -160,12 +156,11 @@ const CartScreen = () => {
 
 export default CartScreen;
 
-// Local styles specific to CartScreen
 const localStyles = StyleSheet.create({
   cartScreenHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between', // To push item count to the right
+    justifyContent: 'space-between',
     marginBottom: Layout.spacing.lg,
     marginTop: Layout.spacing.md,
   },
@@ -205,7 +200,7 @@ const localStyles = StyleSheet.create({
     borderRadius: Layout.borderRadius.md,
     paddingVertical: Layout.spacing.xs,
     paddingHorizontal: Layout.spacing.sm,
-    alignSelf: 'flex-start', // Align to start of its flex container
+    alignSelf: 'flex-start',
   },
   deleteButton: {
     marginLeft: Layout.spacing.md,
@@ -216,8 +211,8 @@ const localStyles = StyleSheet.create({
     padding: Layout.spacing.lg,
     borderTopLeftRadius: Layout.borderRadius.lg,
     borderTopRightRadius: Layout.borderRadius.lg,
-    ...Layout.shadow.medium, // Apply medium shadow
-    marginTop: 'auto', // Pushes it to the bottom
+    ...Layout.shadow.medium,
+    marginTop: 'auto',
   },
   orderInfoTitle: {
     marginBottom: Layout.spacing.lg,
@@ -237,5 +232,13 @@ const localStyles = StyleSheet.create({
   emptyCartText: {
     marginTop: Layout.spacing.md,
     color: Colors.darkGray,
+  },
+  // New or modified styles for the Checkout button
+  checkoutButton: {
+    width: '100%', // Make the button span across
+    paddingVertical: Layout.spacing.md, // Add more vertical padding
+    paddingHorizontal: Layout.spacing.lg, // Add more horizontal padding
+    borderRadius: Layout.borderRadius.md, // Ensure smooth corners
+    marginTop: Layout.spacing.lg, // Add space above the button
   },
 });

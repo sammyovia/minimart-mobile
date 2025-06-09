@@ -23,6 +23,22 @@ export const GlobalStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+primaryButton: {
+    backgroundColor: Colors.primary,
+    borderRadius: Layout.borderRadius.xl, // Increased borderRadius for a smoother, more rounded look
+    paddingVertical: Layout.spacing.md, // Consistent vertical padding
+    paddingHorizontal: Layout.spacing.lg, // Consistent horizontal padding
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%', // Make it span across by default
+  },
+  primaryButtonText: {
+    color: Colors.white,
+    fontSize: 18, // Slightly increased font size for better readability (replace with your desired size)
+    fontWeight: 'bold',
+    // Removed padding from here; it should be on the button itself.
+  },
+
   card: {
     backgroundColor: Colors.white,
     borderRadius: Layout.borderRadius.md, // 10px border radius
@@ -78,19 +94,7 @@ export const GlobalStyles = StyleSheet.create({
     color: Colors.text,
   },
 
-  // --- Buttons ---
-  primaryButton: {
-    backgroundColor: Colors.primary,
-    paddingVertical: Layout.spacing.md,
-    borderRadius: Layout.borderRadius.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  primaryButtonText: {
-    color: Colors.white,
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+
   // For quantity controls
   quantityButton: {
     backgroundColor: Colors.lightGray,
