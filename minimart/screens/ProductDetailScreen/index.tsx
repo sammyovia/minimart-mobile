@@ -16,10 +16,10 @@ import { Layout } from '../../constants/Layout';
 import { GlobalStyles } from '../../styles/GlobalStyles';
 import { Product } from '../../types';
 import { useCart } from '../../contexts/CartContext';
-import { products } from '../../data/products'; // <--- Import your products data here
+import { products } from '../../data/products'; // <--- Import products data here
 
 const ProductDetailScreen = () => {
-  const { productId } = useLocalSearchParams(); // <--- Change: Get productId
+  const { productId } = useLocalSearchParams(); //  Get productId
   const router = useRouter();
   const { addToCart } = useCart();
 

@@ -43,7 +43,7 @@ export default function TabLayout() {
             <Image
               source={focused
                 ? require('../../assets/images/home-active.png') // Your active home icon
-                : require('../../assets/images/home-inactive.png') // Your inactive home icon (black version)
+                : require('../../assets/images/home-active.png') // Your inactive home icon (black version)
               }
               style={localStyles.tabIcon}
             />
