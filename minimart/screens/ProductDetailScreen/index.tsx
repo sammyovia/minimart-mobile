@@ -1,174 +1,154 @@
-// ProductDetailScreen.tsx
-import { Ionicons } from '@expo/vector-icons';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+  View,
+  Text,
   Image,
   SafeAreaView,
   StatusBar,
-  Text,
   TouchableOpacity,
-  View,
   StyleSheet,
+  ActivityIndicator, // For loading state
 } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router'; // Import useLocalSearchParams and useRouter
+import { products } from '../../data/products'; // Import your products data
+import { Product } from '../../types'; // Import your Product type definition
+import { GlobalStyles } from '../../styles/GlobalStyles';
 import { Colors } from '../../constants/Colors';
 import { Layout } from '../../constants/Layout';
-import { GlobalStyles } from '../../styles/GlobalStyles';
-import { Product } from '../../types';
-import { useCart } from '../../contexts/CartContext';
-import { products } from '../../data/products'; // <--- Import products data here
+import { Ionicons } from '@expo/vector-icons';
+import { useCart } from '../../contexts/CartContext'; // Assuming you have a CartContext
 
 const ProductDetailScreen = () => {
-  const { productId } = useLocalSearchParams(); //  Get productId
   const router = useRouter();
-  const { addToCart } = useCart();
+  const { productId } = useLocalSearchParams(); // Get parameters from the URL
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { addToCart } = useCart(); // Assuming you have an addToCart function in your CartContext
 
-  // Find the product based on the ID passed
-  const parsedProduct: Product | undefined = products.find(
-    (p) => p.id.toString() === productId
-  );
+  useEffect(() => {
+    if (productId) {
+      // Find the product from your products array based on the productId
+      const foundProduct = products.find(p => p.id.toString() === productId);
+      if (foundProduct) {
+        setProduct(foundProduct);
+      } else {
+        // Handle case where product is not found (e.g., navigate back, show error)
+        console.warn(`Product with ID ${productId} not found.`);
+        // Optionally, navigate back or show an error message
+        // router.back();
+      }
+    }
+    setLoading(false); // Set loading to false once product search is complete
+  }, [productId]); // Rerun effect if productId changes
 
-  const [showTooltip, setShowTooltip] = useState(false);
-
-  // Handle case where product is not found (e.g., direct navigation with invalid ID)
-  if (!parsedProduct) {
+  if (loading) {
     return (
-      <SafeAreaView style={[GlobalStyles.screenContainer, { justifyContent: 'center', alignItems: 'center' }]}>
-        <Text style={GlobalStyles.bodyText}>Product not found.</Text>
-        <TouchableOpacity style={GlobalStyles.primaryButton} onPress={() => router.back()}>
-          <Text style={GlobalStyles.primaryButtonText}>Go Back</Text>
-        </TouchableOpacity>
+      <View style={[GlobalStyles.screenContainer, localStyles.centered]}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+        <Text style={GlobalStyles.bodyText}>Loading product...</Text>
+      </View>
+    );
+  }
+
+  if (!product) {
+    return (
+      <SafeAreaView style={[GlobalStyles.screenContainer, { paddingTop: StatusBar.currentHeight || 0 }]}>
+        <View style={[GlobalStyles.header, { borderBottomWidth: 0 }]}>
+            <TouchableOpacity onPress={() => router.back()} style={GlobalStyles.flexRow}>
+                <Ionicons name="arrow-back" size={24} color={Colors.text} />
+                <Text style={[GlobalStyles.headerTitle, { marginLeft: Layout.spacing.sm }]}>Product Not Found</Text>
+            </TouchableOpacity>
+        </View>
+        <View style={localStyles.centered}>
+          <Text style={[GlobalStyles.bodyText, { textAlign: 'center' }]}>
+            Sorry, the product you are looking for could not be found.
+          </Text>
+          <TouchableOpacity
+            style={[GlobalStyles.primaryButton, { marginTop: Layout.spacing.md }]}
+            onPress={() => router.back()}
+          >
+            <Text style={GlobalStyles.primaryButtonText}>Go Back</Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     );
   }
 
-  const handleAddToCart = () => {
-    addToCart(parsedProduct);
-    setShowTooltip(true);
-    setTimeout(() => setShowTooltip(false), 3000);
-  };
-
   return (
-    <SafeAreaView
-      style={[GlobalStyles.screenContainer, { paddingTop: StatusBar.currentHeight || 0 }]}
-    >
-      {/* Top Header Section: Logo, Delivery Address, Notification */}
-      <View style={[GlobalStyles.header, { borderBottomWidth: 0, paddingTop: Layout.spacing.md }]}>
-        <View style={GlobalStyles.logo}>
-          <Text style={GlobalStyles.logoText}>Full Logo</Text>
-        </View>
-
-        <View style={GlobalStyles.deliveryAddressContainer}>
-          <Text style={GlobalStyles.deliveryAddressLabel}>DELIVERY ADDRESS</Text>
-          <Text style={GlobalStyles.deliveryAddressText}>Umuezike Road, Oyo State</Text>
-        </View>
-
-        <TouchableOpacity style={GlobalStyles.notificationIcon}>
-          <Ionicons name="notifications-outline" size={24} color={Colors.darkGray} />
+    <SafeAreaView style={[GlobalStyles.screenContainer, { paddingTop: StatusBar.currentHeight || 0 }]}>
+      {/* Header with back button and product name */}
+      <View style={[GlobalStyles.header, { borderBottomWidth: 0 }]}>
+        <TouchableOpacity onPress={() => router.back()} style={GlobalStyles.flexRow}>
+          <Ionicons name="arrow-back" size={24} color={Colors.text} />
+          <Text style={[GlobalStyles.headerTitle, { marginLeft: Layout.spacing.sm }]}>{product.name}</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Main Content View with padding */}
-      <View style={[GlobalStyles.contentPadding, localStyles.container]}>
-        {/* Go Back Button */}
-        <TouchableOpacity onPress={() => router.back()} style={localStyles.goBack}>
-          <Ionicons name="arrow-back" size={24} color={Colors.text} />
-          <Text style={[GlobalStyles.headerTitle, { marginLeft: Layout.spacing.sm }]}>Go back</Text>
-        </TouchableOpacity>
-
-        {/* Product Image Wrapper */}
-        <View style={localStyles.imageWrapper}>
-          <Image source={parsedProduct.image} style={localStyles.productImage} />
-          {/* Heart Icon (Favorite) */}
-          <TouchableOpacity style={localStyles.heartIcon}>
-            <Ionicons name="heart-outline" size={24} color={Colors.primary} />
-          </TouchableOpacity>
-        </View>
-
-        {/* Product Info Container */}
-        <View style={localStyles.infoContainer}>
-          <Text style={[GlobalStyles.heading2, localStyles.productName]}>{parsedProduct.name}</Text>
-          <Text style={[GlobalStyles.priceText, localStyles.productPrice]}>${parsedProduct.price}</Text>
-          <Text style={[GlobalStyles.bodyText, localStyles.productDescription]}>
-            {parsedProduct.description}
-          </Text>
-        </View>
+      <View style={localStyles.content}>
+        <Image source={product.image} style={localStyles.productImage} />
+        <Text style={localStyles.productName}>{product.name}</Text>
+        <Text style={localStyles.productPrice}>${parseFloat(product.price).toFixed(2)}</Text>
+        <Text style={localStyles.productDescription}>{product.description}</Text>
 
         {/* Add to Cart Button */}
-        <TouchableOpacity style={GlobalStyles.primaryButton} onPress={handleAddToCart}>
+        <TouchableOpacity
+          style={[GlobalStyles.primaryButton, localStyles.addToCartButton]}
+          onPress={() => {
+            addToCart(product); // Add the product to cart
+            // Optional: Show a confirmation message or navigate to cart
+            // router.push('/cart');
+          }}
+        >
           <Text style={GlobalStyles.primaryButtonText}>Add to Cart</Text>
         </TouchableOpacity>
-
-        {/* Tooltip for "Item has been added to cart" */}
-        {showTooltip && (
-          <View style={GlobalStyles.tooltipContainer}>
-            <View style={GlobalStyles.tooltipBar} />
-            <Ionicons
-              name="checkmark-circle"
-              size={24}
-              color={Colors.success}
-              style={GlobalStyles.tooltipIcon}
-            />
-            <Text style={GlobalStyles.tooltipText}>Item has been added to cart</Text>
-            <TouchableOpacity onPress={() => setShowTooltip(false)} style={GlobalStyles.tooltipCloseButton}>
-              <Ionicons name="close" size={20} color={Colors.darkGray} />
-            </TouchableOpacity>
-          </View>
-        )}
       </View>
     </SafeAreaView>
   );
 };
 
-export default ProductDetailScreen;
-
 const localStyles = StyleSheet.create({
-  container: {
+  content: {
     flex: 1,
+    padding: Layout.spacing.lg,
+    alignItems: 'center', // Center content horizontally
   },
-  goBack: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: Layout.spacing.lg,
-    marginTop: Layout.spacing.md,
-  },
-  imageWrapper: {
-    backgroundColor: Colors.white,
-    borderRadius: Layout.borderRadius.md,
-    ...Layout.shadow.medium,
-    alignItems: 'center',
+  centered: {
+    flex: 1,
     justifyContent: 'center',
-    padding: Layout.spacing.xl,
-    marginBottom: Layout.spacing.lg,
+    alignItems: 'center',
+    padding: Layout.spacing.lg,
   },
   productImage: {
-    width: Layout.window.width * 0.7,
-    height: Layout.window.width * 0.7,
+    width: '100%',
+    height: 250, // Adjust as needed
     resizeMode: 'contain',
-  },
-  heartIcon: {
-    position: 'absolute',
-    top: Layout.spacing.sm,
-    right: Layout.spacing.sm,
-    backgroundColor: Colors.white,
-    borderRadius: Layout.borderRadius.xl,
-    padding: Layout.spacing.xs,
-    ...Layout.shadow.light,
-  },
-  infoContainer: {
-    flex: 1,
-    paddingHorizontal: Layout.spacing.sm,
-    marginBottom: Layout.spacing.xl,
+    borderRadius: Layout.borderRadius.md,
+    marginBottom: Layout.spacing.lg,
   },
   productName: {
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: Layout.spacing.sm,
+    textAlign: 'center',
+    color: Colors.text,
   },
   productPrice: {
-    marginBottom: Layout.spacing.md,
+    fontSize: 22,
+    fontWeight: 'bold',
     color: Colors.primary,
+    marginBottom: Layout.spacing.md,
   },
   productDescription: {
-    lineHeight: 22,
+    fontSize: 16,
     color: Colors.textSecondary,
+    textAlign: 'center',
+    marginBottom: Layout.spacing.lg,
+    lineHeight: 24,
+  },
+  addToCartButton: {
+    marginTop: 'auto', // Push to the bottom of the content area
+    width: '100%',
   },
 });
+
+export default ProductDetailScreen;
