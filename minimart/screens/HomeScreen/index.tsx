@@ -40,7 +40,7 @@ const HomeScreen = () => {
       onPress={() =>
         router.push({
           pathname: '/(view)/productDetail',
-          params: { productId: item.id.toString() }, // Pass product ID as string
+          params: { productDetail: JSON.stringify(item) }, // Pass the entire product object as a string
         })
       }
     >

@@ -8,7 +8,7 @@ const ProfileScreen = () => {
       <Header />
       <View style={styles.profileContainer}>
         <Image
-          source={require('../../assets/images/adaptive-icon.png')} // Replace with user avatar
+          source={require('../../assets/images/profile.png')} // Replace with user avatar
           style={styles.avatar}
         />
         <Text style={styles.name}>Sammy Igbinovia</Text>

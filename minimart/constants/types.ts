@@ -17,6 +17,6 @@ export const Typography = {
   },
   caption: {
     fontSize: 12,
-    color: Colors.muted,
+    color: Colors.textSecondary,
   },
 };

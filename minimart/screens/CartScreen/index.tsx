@@ -16,11 +16,11 @@ import { Colors } from '../../constants/Colors';
 import { Layout } from '../../constants/Layout';
 import { GlobalStyles } from '../../styles/GlobalStyles';
 import { useCart } from '../../contexts/CartContext';
-import { Product, CartItem } from '../../types';
+import { CartItem } from '../../types'; // Ensure your Product and CartItem types are correctly defined here
 
 interface CartItemProps {
   item: CartItem;
-  increaseQuantity: (productId: number) => void;
+  increaseQuantity: (productId: number) => void; // Fixed product.Id to productId
   decreaseQuantity: (productId: number) => void;
   removeFromCart: (productId: number) => void;
 }
@@ -32,31 +32,34 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item, increaseQuantity, de
     <View style={[GlobalStyles.card, localStyles.cartItemContainer]}>
       <Image source={item.product.image} style={localStyles.cartItemImage} />
       <View style={localStyles.cartItemDetails}>
-        <Text style={[GlobalStyles.bodyText, localStyles.cartItemName]}>{item.product.name}</Text>
-        <Text style={[GlobalStyles.priceText, localStyles.cartItemPrice]}>
-          ${itemPrice.toFixed(2)}
-        </Text>
+        {/* Product Name */}
+        <Text style={localStyles.cartItemNameText}>{item.product.name}</Text>
+        {/* Price and "In stock" */}
+        <Text style={localStyles.cartItemPriceText}>${itemPrice.toFixed(2)}</Text>
+        <Text style={localStyles.inStockText}>In stock</Text>
+        {/* Quantity Control */}
         <View style={localStyles.quantityControl}>
           <TouchableOpacity
             onPress={() => decreaseQuantity(item.product.id)}
-            style={GlobalStyles.quantityButton}
+            style={localStyles.quantityButton}
           >
-            <Ionicons name="remove" size={20} color={Colors.text} />
+            <Ionicons name="remove" size={16} color={Colors.textSecondary} />
           </TouchableOpacity>
-          <Text style={GlobalStyles.quantityButtonText}>{item.quantity}</Text>
+          <Text style={localStyles.quantityButtonText}>{item.quantity}</Text>
           <TouchableOpacity
             onPress={() => increaseQuantity(item.product.id)}
-            style={GlobalStyles.quantityButton}
+            style={localStyles.quantityButton}
           >
-            <Ionicons name="add" size={20} color={Colors.text} />
+            <Ionicons name="add" size={16} color={Colors.textSecondary} />
           </TouchableOpacity>
         </View>
       </View>
+      {/* Delete Button */}
       <TouchableOpacity
         onPress={() => removeFromCart(item.product.id)}
         style={localStyles.deleteButton}
       >
-        <Ionicons name="trash-outline" size={24} color={Colors.danger} />
+        <Ionicons name="trash-outline" size={24} color={Colors.darkGray} /> {/* Changed color to darkGray */}
       </TouchableOpacity>
     </View>
   );
@@ -80,7 +83,7 @@ const CartScreen = () => {
       {/* Top Header Section: Logo, Delivery Address, Notification */}
       <View style={[GlobalStyles.header, { borderBottomWidth: 0, paddingTop: Layout.spacing.md }]}>
         <View style={GlobalStyles.logo}>
-          <Text style={GlobalStyles.logoText}>Full Logo</Text>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', color: Colors.primary }}>Full Logo</Text>
         </View>
 
         <View style={GlobalStyles.deliveryAddressContainer}>
@@ -99,7 +102,7 @@ const CartScreen = () => {
           <Ionicons name="arrow-back" size={24} color={Colors.text} />
           <Text style={[GlobalStyles.headerTitle, { marginLeft: Layout.spacing.sm }]}>Your Cart</Text>
         </TouchableOpacity>
-        <Text style={GlobalStyles.secondaryText}>{cartItems.length} items</Text>
+        <Text style={localStyles.itemCountText}>{cartItems.length} items</Text>
       </View>
 
       <FlatList
@@ -133,18 +136,17 @@ const CartScreen = () => {
         <View style={localStyles.orderInfoContainer}>
           <Text style={[GlobalStyles.heading2, localStyles.orderInfoTitle]}>Order Info</Text>
           <View style={GlobalStyles.flexRowSpaceBetween}>
-            <Text style={GlobalStyles.bodyText}>Subtotal</Text>
-            <Text style={GlobalStyles.bodyText}>${subtotal.toFixed(2)}</Text>
+            <Text style={localStyles.orderInfoLabel}>Subtotal</Text>
+            <Text style={localStyles.orderInfoValue}>${subtotal.toFixed(2)}</Text>
           </View>
           <View style={[GlobalStyles.flexRowSpaceBetween, { marginTop: Layout.spacing.sm }]}>
-            <Text style={GlobalStyles.bodyText}>Shipping</Text>
-            <Text style={GlobalStyles.bodyText}>${shipping.toFixed(2)}</Text>
+            <Text style={localStyles.orderInfoLabel}>Shipping</Text>
+            <Text style={localStyles.orderInfoValue}>${shipping.toFixed(2)}</Text>
           </View>
           <View style={[GlobalStyles.flexRowSpaceBetween, localStyles.totalRow]}>
-            <Text style={GlobalStyles.heading2}>Total</Text>
-            <Text style={GlobalStyles.heading2}>${total.toFixed(2)}</Text>
+            <Text style={localStyles.totalLabel}>Total</Text>
+            <Text style={localStyles.totalValue}>${total.toFixed(2)}</Text>
           </View>
-          {/* Apply local style to adjust the button for full width and correct padding */}
           <TouchableOpacity style={[GlobalStyles.primaryButton, localStyles.checkoutButton]}>
             <Text style={GlobalStyles.primaryButtonText}>Checkout (${total.toFixed(2)})</Text>
           </TouchableOpacity>
@@ -164,6 +166,11 @@ const localStyles = StyleSheet.create({
     marginBottom: Layout.spacing.lg,
     marginTop: Layout.spacing.md,
   },
+  itemCountText: {
+    fontSize: 14,
+    color: Colors.textSecondary,
+    fontWeight: '500',
+  },
   cartListContent: {
     paddingHorizontal: Layout.spacing.lg,
     paddingBottom: Layout.spacing.md,
@@ -173,6 +180,9 @@ const localStyles = StyleSheet.create({
     alignItems: 'center',
     padding: Layout.spacing.sm,
     marginBottom: Layout.spacing.md,
+    borderRadius: Layout.borderRadius.md, // Match card styling
+    backgroundColor: Colors.white, // Match card background
+    ...Layout.shadow.light, // Add subtle shadow for each item card
   },
   cartItemImage: {
     width: 80,
@@ -184,13 +194,23 @@ const localStyles = StyleSheet.create({
   cartItemDetails: {
     flex: 1,
     justifyContent: 'space-between',
+    paddingVertical: Layout.spacing.xs, // Add some vertical padding inside details
   },
-  cartItemName: {
+  cartItemNameText: {
+    fontSize: 16,
     fontWeight: '600',
+    color: Colors.text,
     marginBottom: Layout.spacing.xs,
   },
-  cartItemPrice: {
-    color: Colors.textSecondary,
+  cartItemPriceText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: Colors.primary,
+    marginBottom: Layout.spacing.xs,
+  },
+  inStockText: {
+    fontSize: 12,
+    color: Colors.success, // Use a green color for "In stock"
     marginBottom: Layout.spacing.sm,
   },
   quantityControl: {
@@ -198,13 +218,26 @@ const localStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.lightGray,
     borderRadius: Layout.borderRadius.md,
+    // Adjust padding to make buttons look better
     paddingVertical: Layout.spacing.xs,
     paddingHorizontal: Layout.spacing.sm,
     alignSelf: 'flex-start',
   },
+  quantityButton: {
+    padding: Layout.spacing.xs,
+  },
+  quantityButtonText: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: Colors.text,
+    marginHorizontal: Layout.spacing.sm, // Space between number and buttons
+  },
   deleteButton: {
     marginLeft: Layout.spacing.md,
     padding: Layout.spacing.sm,
+    // Add margin to align with the bottom of the card content
+    alignSelf: 'flex-end',
+    marginBottom: Layout.spacing.xs, // Push it slightly up from the very bottom edge
   },
   orderInfoContainer: {
     backgroundColor: Colors.white,
@@ -216,12 +249,35 @@ const localStyles = StyleSheet.create({
   },
   orderInfoTitle: {
     marginBottom: Layout.spacing.lg,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: Colors.text,
+  },
+  orderInfoLabel: {
+    fontSize: 16,
+    color: Colors.textSecondary,
+    fontWeight: '400',
+  },
+  orderInfoValue: {
+    fontSize: 16,
+    color: Colors.text,
+    fontWeight: '500',
   },
   totalRow: {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: Colors.mediumGray,
     paddingTop: Layout.spacing.md,
     marginTop: Layout.spacing.md,
+  },
+  totalLabel: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: Colors.text,
+  },
+  totalValue: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: Colors.text,
   },
   emptyCartContainer: {
     flex: 1,
@@ -233,12 +289,11 @@ const localStyles = StyleSheet.create({
     marginTop: Layout.spacing.md,
     color: Colors.darkGray,
   },
-  // New or modified styles for the Checkout button
   checkoutButton: {
-    width: '100%', // Make the button span across
-    paddingVertical: Layout.spacing.md, // Add more vertical padding
-    paddingHorizontal: Layout.spacing.lg, // Add more horizontal padding
-    borderRadius: Layout.borderRadius.md, // Ensure smooth corners
-    marginTop: Layout.spacing.lg, // Add space above the button
+    width: '100%',
+    paddingVertical: Layout.spacing.md,
+    paddingHorizontal: Layout.spacing.lg,
+    borderRadius: Layout.borderRadius.md,
+    marginTop: Layout.spacing.lg,
   },
 });
