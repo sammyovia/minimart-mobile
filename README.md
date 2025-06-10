@@ -8,8 +8,7 @@ This project is a functional mobile application developed using React Native, me
 
 * **Figma Design URL:** [https://www.figma.com/design/ff6kLW7UB7N7JH8P33j39j/Alphatwelve-Mobile-App-Developer-Assessment](https://www.figma.com/design/ff6kLW7UB7N7JH8P33j39j/Alphatwelve-Mobile-App-Developer-Assessment)
 * **Android APK Download Link:** https://expo.dev/accounts/sammyovia/projects/minimart/builds/ece1f8bb-f163-4aed-820d-885e14391540
-* **Source Code URL:** github.com/sammyovia/minimart-mobile
-
+* **Source Code URL:** https://github.com/sammyovia/minimart-mobile
 ## Features
 
 The application allows users to:
@@ -104,7 +103,7 @@ To set up and run the application locally:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/sammyovia/minimart-mobile
+    git clone c
     cd minimart-mobile 
     ```
 2.  **Install dependencies:**
