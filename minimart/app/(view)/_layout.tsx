@@ -1,9 +1,8 @@
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { Stack } from 'expo-router';
 import React from 'react';
 
 export default function ViewLayout() {
-  const colorScheme = useColorScheme();
+  
 
   return (
      <Stack.Screen
