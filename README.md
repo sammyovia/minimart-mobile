@@ -112,6 +112,7 @@ To set up and run the application locally:
     ```
 3. **Generate a build:**
    See Expo Docs https://docs.expo.dev/build/setup/
+   Ensure to delete the current projectId from the app.json file, login to eas and generate a build type.
 
 3.  **Start the Expo development server:**
     ```bash
