@@ -128,10 +128,10 @@ To set up and run the application locally:
     * Press `i` to run on an iOS simulator.
 
 ## Screenshots of Compiled App
-![Alt text](./minimart/assets/images/home-screen.jpeg)
-![Alt text](./minimart/assets/images/empty-cart.jpeg)
-![Alt text](./minimart/assets/images/pop-cart.jpeg)
-![Alt text](./minimart/assets/images/empty-cart.jpeg)
-![Alt text](./minimart/assets/images/product-detail.jpeg)
+![Alt text](https://cuzradio.com/img/product-detail.jpeg)
+![Alt text](https://cuzradio.com/img/empty-cart.jpeg)
+![Alt text](https://cuzradio.com/img/pop-cart.jpeg)
+![Alt text](https://cuzradio.com/imghome-screen.jpeg)
+
 =======
 
