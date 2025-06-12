@@ -45,12 +45,12 @@ const ProductDetailScreen = () => {
           </TouchableOpacity>
         </View>
 
-        <View style={[GlobalStyles.contentPadding, localStyles.goBackButtonContainer]}>
+        {/* <View style={[GlobalStyles.contentPadding, localStyles.goBackButtonContainer]}>
           <TouchableOpacity onPress={() => router.back()} style={GlobalStyles.flexRow}>
             <Ionicons name="arrow-back" size={24} color={Colors.text} />
             <Text style={[GlobalStyles.headerTitle, { marginLeft: Layout.spacing.sm }]}>Product Details</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         <View style={localStyles.centered}>
           <Text style={[GlobalStyles.bodyText, { textAlign: 'center' }]}>
