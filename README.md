@@ -116,6 +116,7 @@ To set up and run the application locally:
     ```
 3. **Generate a build:**
    See Expo Docs https://docs.expo.dev/build/setup/
+   Ensure to delete the current projectId from the app.json file, login to eas and generate a build type.
 
 3.  **Start the Expo development server:**
     ```bash
@@ -132,3 +133,5 @@ To set up and run the application locally:
 ![Alt text](./minimart/assets/images/pop-cart.jpeg)
 ![Alt text](./minimart/assets/images/empty-cart.jpeg)
 ![Alt text](./minimart/assets/images/product-detail.jpegAdde)
+=======
+
