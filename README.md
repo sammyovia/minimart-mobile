@@ -124,3 +124,5 @@ To set up and run the application locally:
     * Press `i` to run on an iOS simulator.
 
 ## Screenshots of Compiled App
+![WhatsApp Image 2025-06-11 at 11 13 13 PM](https://github.com/user-attachments/assets/beb127b2-f300-4e0b-b23e-a34af2246a87)
+
