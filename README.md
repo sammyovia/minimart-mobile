@@ -7,8 +7,8 @@ This project is a functional mobile application developed using React Native, me
 ## Live Preview
 
 * **Figma Design URL:** [https://www.figma.com/design/ff6kLW7UB7N7JH8P33j39j/Alphatwelve-Mobile-App-Developer-Assessment](https://www.figma.com/design/ff6kLW7UB7N7JH8P33j39j/Alphatwelve-Mobile-App-Developer-Assessment)
-* **Android APK Download Link:** (Please insert your public Google Drive or other cloud storage link here)
-* **Source Code URL:** (Please insert your public GitHub or other Git repository link here)
+* **Android APK Download Link:** (https://drive.google.com/file/d/1SkbNSdxBCirdeNCUbwyqsrkNcTLEy2ZA/view?usp=sharing)
+* **Source Code URL:** (https://github.com/sammyovia/minimart-mobile)
 
 ## Features
 
