@@ -123,3 +123,4 @@ To set up and run the application locally:
     * Press `i` to run on an iOS simulator.
 
 ## Screenshots of Compiled App
+![Alt text](images/example.png)
