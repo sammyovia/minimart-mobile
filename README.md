@@ -132,6 +132,6 @@ To set up and run the application locally:
 ![Alt text](./minimart/assets/images/empty-cart.jpeg)
 ![Alt text](./minimart/assets/images/pop-cart.jpeg)
 ![Alt text](./minimart/assets/images/empty-cart.jpeg)
-![Alt text](./minimart/assets/images/product-detail.jpegAdde)
+![Alt text](./minimart/assets/images/product-detail.jpeg)
 =======
 
