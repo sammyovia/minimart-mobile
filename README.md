@@ -2,13 +2,14 @@
 
 ## Project Overview
 
-This project is a functional mobile application developed using React Native, meticulously converting a Figma design into a fully interactive e-commerce preview app. The application demonstrates my core mobile development skills including faithful UI implementation, efficient navigation, robust state management, and modular component structuring.
+This project is a functional mobile application developed using React Native, meticulously converting a Figma design into a fully interactive e-commerce preview app. The application demonstrates core mobile development skills including faithful UI implementation, efficient navigation, robust state management, and modular component structuring.
 
 ## Live Preview
 
 * **Figma Design URL:** [https://www.figma.com/design/ff6kLW7UB7N7JH8P33j39j/Alphatwelve-Mobile-App-Developer-Assessment](https://www.figma.com/design/ff6kLW7UB7N7JH8P33j39j/Alphatwelve-Mobile-App-Developer-Assessment)
-* **Android APK Download Link:** https://expo.dev/accounts/sammyovia/projects/minimart/builds/ece1f8bb-f163-4aed-820d-885e14391540
-* **Source Code URL:** https://github.com/sammyovia/minimart-mobile
+* **Android APK Download Link:** (Please insert your public Google Drive or other cloud storage link here)
+* **Source Code URL:** (Please insert your public GitHub or other Git repository link here)
+
 ## Features
 
 The application allows users to:
@@ -103,7 +104,7 @@ To set up and run the application locally:
 
 1.  **Clone the repository:**
     ```bash
-    git clone c
+    git clone https://github.com/sammyovia/minimart-mobile
     cd minimart-mobile 
     ```
 2.  **Install dependencies:**
@@ -123,4 +124,8 @@ To set up and run the application locally:
     * Press `i` to run on an iOS simulator.
 
 ## Screenshots of Compiled App
-![Alt text](images/example.png)
+![Alt text](./minimart/assets/images/home-screen.png)
+![Alt text](./minimart/assets/images/empty-cart.png)
+![Alt text](./minimart/assets/images/pop-cart.png)
+![Alt text](./minimart/assets/images/empty-cart.png)
+![Alt text](./minimart/assets/images/product-detail.png)
