@@ -7,8 +7,8 @@ This project is a functional mobile application developed using React Native, me
 ## Live Preview
 
 * **Figma Design URL:** [https://www.figma.com/design/ff6kLW7UB7N7JH8P33j39j/Alphatwelve-Mobile-App-Developer-Assessment](https://www.figma.com/design/ff6kLW7UB7N7JH8P33j39j/Alphatwelve-Mobile-App-Developer-Assessment)
-* **Android APK Download Link:** (https://drive.google.com/file/d/1SkbNSdxBCirdeNCUbwyqsrkNcTLEy2ZA/view?usp=sharing)
-* **Source Code URL:** (https://github.com/sammyovia/minimart-mobile)
+* **Android APK Download Link:** https://drive.google.com/file/d/1SkbNSdxBCirdeNCUbwyqsrkNcTLEy2ZA/view?usp=sharing
+* **Source Code URL:** https://github.com/sammyovia/minimart-mobile
 
 ## Features
 
@@ -124,8 +124,8 @@ To set up and run the application locally:
     * Press `i` to run on an iOS simulator.
 
 ## Screenshots of Compiled App
-![Alt text](./minimart/assets/images/home-screen.png)
-![Alt text](./minimart/assets/images/empty-cart.png)
-![Alt text](./minimart/assets/images/pop-cart.png)
-![Alt text](./minimart/assets/images/empty-cart.png)
-![Alt text](./minimart/assets/images/product-detail.png)
+![Alt text](./minimart/assets/images/home-screen.jpeg)
+![Alt text](./minimart/assets/images/empty-cart.jpeg)
+![Alt text](./minimart/assets/images/pop-cart.jpeg)
+![Alt text](./minimart/assets/images/empty-cart.jpeg)
+![Alt text](./minimart/assets/images/product-detail.jpegAdde)
