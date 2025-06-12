@@ -22,7 +22,7 @@ export default function RootLayout() {
     <CartProvider>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="(view)" />
+        <Stack.Screen name="(view)" options={{ headerShown: false }}/>
       </Stack>
       <StatusBar style="light" /> {/* or "light" depending on your preference */}
     </CartProvider>

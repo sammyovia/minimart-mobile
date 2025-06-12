@@ -2,13 +2,14 @@
 
 ## Project Overview
 
-This project is a functional mobile application developed using React Native, meticulously converting a Figma design into a fully interactive e-commerce preview app. The application demonstrates my core mobile development skills including faithful UI implementation, efficient navigation, robust state management, and modular component structuring.
+This project is a functional mobile application developed using React Native, meticulously converting a Figma design into a fully interactive e-commerce preview app. The application demonstrates core mobile development skills including faithful UI implementation, efficient navigation, robust state management, and modular component structuring.
 
 ## Live Preview
 
 * **Figma Design URL:** [https://www.figma.com/design/ff6kLW7UB7N7JH8P33j39j/Alphatwelve-Mobile-App-Developer-Assessment](https://www.figma.com/design/ff6kLW7UB7N7JH8P33j39j/Alphatwelve-Mobile-App-Developer-Assessment)
-* **Android APK Download Link:** https://expo.dev/accounts/sammyovia/projects/minimart/builds/ece1f8bb-f163-4aed-820d-885e14391540
+* **Android APK Download Link:** https://drive.google.com/file/d/1SkbNSdxBCirdeNCUbwyqsrkNcTLEy2ZA/view?usp=sharing
 * **Source Code URL:** https://github.com/sammyovia/minimart-mobile
+
 ## Features
 
 The application allows users to:
@@ -103,7 +104,10 @@ To set up and run the application locally:
 
 1.  **Clone the repository:**
     ```bash
-    git clone c
+    git clone https://github.com/sammyovia/minimart-mobile
+
+    Switch to the fixed branch
+    
     cd minimart-mobile 
     ```
 2.  **Install dependencies:**
@@ -124,5 +128,10 @@ To set up and run the application locally:
     * Press `i` to run on an iOS simulator.
 
 ## Screenshots of Compiled App
-![WhatsApp Image 2025-06-11 at 11 13 13 PM](https://github.com/user-attachments/assets/beb127b2-f300-4e0b-b23e-a34af2246a87)
+![Alt text](./minimart/assets/images/home-screen.jpeg)
+![Alt text](./minimart/assets/images/empty-cart.jpeg)
+![Alt text](./minimart/assets/images/pop-cart.jpeg)
+![Alt text](./minimart/assets/images/empty-cart.jpeg)
+![Alt text](./minimart/assets/images/product-detail.jpegAdde)
+=======
 

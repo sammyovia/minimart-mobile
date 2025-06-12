@@ -124,3 +124,8 @@ To set up and run the application locally:
     * Press `i` to run on an iOS simulator.
 
 ## Screenshots of Compiled App
+![Alt text](./minimart/assets/images/home-screen.png)
+![Alt text](./minimart/assets/images/empty-cart.png)
+![Alt text](./minimart/assets/images/pop-cart.png)
+![Alt text](./minimart/assets/images/empty-cart.png)
+![Alt text](./minimart/assets/images/product-detail.png)
